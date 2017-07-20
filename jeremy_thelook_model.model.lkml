@@ -1,12 +1,10 @@
-connection: "thelook"
+connection: "thelook_events"
 
 # include all the views
 include: "*.view"
 
 # include all the dashboards
 include: "*.dashboard"
-
-explore: connection_reg_r3 {}
 
 explore: events {
   join: users {
