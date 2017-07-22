@@ -1,5 +1,5 @@
 view: users {
-  sql_table_name: demo_db.users ;;
+  sql_table_name: public.users ;;
 
   dimension: id {
     primary_key: yes
@@ -57,9 +57,24 @@ view: users {
     sql: ${TABLE}.last_name ;;
   }
 
+  dimension: latitude {
+    type: number
+    sql: ${TABLE}.latitude ;;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: ${TABLE}.longitude ;;
+  }
+
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+  }
+
+  dimension: traffic_source {
+    type: string
+    sql: ${TABLE}.traffic_source ;;
   }
 
   dimension: zip {
@@ -69,18 +84,6 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
-  }
-
-  # ----- Sets of fields for drilling ------
-  set: detail {
-    fields: [
-      id,
-      last_name,
-      first_name,
-      events.count,
-      orders.count,
-      user_data.count
-    ]
+    drill_fields: [id, last_name, first_name, events.count, order_items.count]
   }
 }

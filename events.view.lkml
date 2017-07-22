@@ -1,10 +1,26 @@
 view: events {
-  sql_table_name: demo_db.events ;;
+  sql_table_name: public.events ;;
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+  }
+
+  dimension: browser {
+    type: string
+    sql: ${TABLE}.browser ;;
+  }
+
+  dimension: city {
+    type: string
+    sql: ${TABLE}.city ;;
+  }
+
+  dimension: country {
+    type: string
+    map_layer_name: countries
+    sql: ${TABLE}.country ;;
   }
 
   dimension_group: created {
@@ -21,9 +37,54 @@ view: events {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: type_id {
+  dimension: event_type {
+    type: string
+    sql: ${TABLE}.event_type ;;
+  }
+
+  dimension: ip_address {
+    type: string
+    sql: ${TABLE}.ip_address ;;
+  }
+
+  dimension: latitude {
     type: number
-    sql: ${TABLE}.type_id ;;
+    sql: ${TABLE}.latitude ;;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: os {
+    type: string
+    sql: ${TABLE}.os ;;
+  }
+
+  dimension: sequence_number {
+    type: number
+    sql: ${TABLE}.sequence_number ;;
+  }
+
+  dimension: session_id {
+    type: string
+    sql: ${TABLE}.session_id ;;
+  }
+
+  dimension: state {
+    type: string
+    sql: ${TABLE}.state ;;
+  }
+
+  dimension: traffic_source {
+    type: string
+    sql: ${TABLE}.traffic_source ;;
+  }
+
+  dimension: uri {
+    type: string
+    sql: ${TABLE}.uri ;;
   }
 
   dimension: user_id {
@@ -32,13 +93,13 @@ view: events {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: value {
-    type: string
-    sql: ${TABLE}.value ;;
+  dimension: zip {
+    type: zipcode
+    sql: ${TABLE}.zip ;;
   }
 
   measure: count {
     type: count
-    drill_fields: [id, users.last_name, users.first_name, users.id]
+    drill_fields: [id, users.id, users.last_name, users.first_name]
   }
 }
