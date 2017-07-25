@@ -36,9 +36,16 @@ explore: inventory_items {
     filters: {
       field: product_brand
       value: "Dickies"
-
     }
+  }label: "Dickies Inventory"
+}
+
+explore: users {
+  join: events {
+    relationship: one_to_many
+    sql_on: ${users.id} = ${events.id} ;;
   }
+  label: "User's Events"
 }
 
 # explore: order_items {
