@@ -25,10 +25,20 @@ explore: order_items {
 
 explore: inventory_items {
   join: products {
+    view_label: "Limited Products"
     relationship: one_to_one
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
   }
-  sql_always_having: ${product_distribution_center_id} = 1 ;;
+  sql_always_where: ${product_distribution_center_id} = 1 ;;
+  persist_for: "4 hours"
+  fields: [ALL_FIELDS*, -products.cost]
+  always_filter: {
+    filters: {
+      field: product_brand
+      value: "Dickies"
+
+    }
+  }
 }
 
 # explore: order_items {

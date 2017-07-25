@@ -7,6 +7,13 @@ view: order_items {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: distance {
+    type:  distance
+    start_location_field: distribution_centers.location
+    end_location_field: users.location
+    units:  miles
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -79,6 +86,21 @@ view: order_items {
     sql: ${TABLE}.shipped_at ;;
   }
 
+  dimension: price_category {
+    case: {
+      when: {
+        sql: ${order_items.sale_price} > 300  ;;
+        label: "expensive"
+      }
+      when: {
+        sql: ${order_items.sale_price} < 80 ;;
+        label: "affordable"
+      }
+      else: "mid_ranged"
+    }
+    alpha_sort:  yes
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
@@ -93,6 +115,37 @@ view: order_items {
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+  measure: max_distance {
+    type: max
+    sql:  ${distance};;
+    value_format_name: decimal_2
+  }
+
+  measure: min_sold {
+    type: min
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: avg_sold {
+    type: average
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: sum_sold {
+    type: sum
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: total_distance_shipped {
+    type: sum_distinct
+    sql_distinct_key: ${order_items.id} ;;
+    sql: ${distance} ;;
+    value_format_name: decimal_1
   }
 
   # ----- Sets of fields for drilling ------

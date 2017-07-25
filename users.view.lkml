@@ -12,6 +12,13 @@ view: users {
     sql: ${TABLE}.age ;;
   }
 
+  dimension: age_group {
+    type: tier
+    tiers: [18,25,35,41,50,65]
+    style: integer
+    sql: ${age} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -67,6 +74,12 @@ view: users {
     sql: ${TABLE}.longitude ;;
   }
 
+  dimension: location {
+    type: location
+    sql_longitude: ${users.longitude} ;;
+    sql_latitude: ${users.latitude} ;;
+  }
+
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
@@ -80,6 +93,11 @@ view: users {
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+  }
+
+  dimension: West_Coast {
+    type: yesno
+    sql: ${state} IN ('California', 'Oregon', 'Washington') ;;
   }
 
   measure: count {
