@@ -37,6 +37,7 @@ view: products {
     sql: $(TABLE).rank + 10 ;;
     }
 
+
   dimension: rank_plus_one_half {
     type: number
     sql: ${TABLE}.rank + 0.5 ;;
