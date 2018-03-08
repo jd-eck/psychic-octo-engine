@@ -37,6 +37,11 @@ view: products {
     sql: ${TABLE}.rank + 1 ;;
   }
 
+  dimension: rank_plus_two {
+    type: number
+    sql: ${TABLE}.rank + 2 ;;
+  }
+
   dimension: retail_price {
     type: number
     sql: ${TABLE}.retail_price ;;
