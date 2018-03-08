@@ -31,6 +31,11 @@ view: products {
     type: number
     sql: ${TABLE}.rank ;;
   }
+  
+  dimension: rank_plus_ten {
+    type: number
+    sql: $(TABLE).rank + 10 ;;
+    }
 
   dimension: rank_plus_one {
     type: number
