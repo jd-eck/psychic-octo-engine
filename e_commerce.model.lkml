@@ -47,10 +47,11 @@ explore: orders {
 }
 
 explore: products {
-  join: order_items
-  type: left_outer
-  sql_on: ${products.id} = ${order_items.inventory_item_id} ;;
-  relationship: one_to_many
+  join: order_items {
+    type: left_outer
+    sql_on: ${products.id} = ${order_items.inventory_item_id} ;;
+    relationship: one_to_many
+  }
 }
 
 explore: schema_migrations {}
