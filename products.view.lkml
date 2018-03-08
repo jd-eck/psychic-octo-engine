@@ -31,20 +31,20 @@ view: products {
     type: number
     sql: ${TABLE}.rank ;;
   }
-  
+
   dimension: rank_plus_ten {
     type: number
     sql: $(TABLE).rank + 10 ;;
     }
 
-  dimension: rank_plus_one {
+  dimension: rank_plus_one_half {
     type: number
-    sql: ${TABLE}.rank + 1 ;;
+    sql: ${TABLE}.rank + 0.5 ;;
   }
 
-  dimension: rank_plus_two {
+  dimension: rank_plus_three {
     type: number
-    sql: ${TABLE}.rank + 2 ;;
+    sql: ${TABLE}.rank + 3 ;;
   }
 
   dimension: retail_price {
