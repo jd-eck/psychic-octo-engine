@@ -32,20 +32,10 @@ view: products {
     sql: ${TABLE}.rank ;;
   }
   
-  dimension: rank_plus_ten {
+  dimension: rank_plus_twelve {
     type: number
     sql: $(TABLE).rank + 10 ;;
     }
-
-  dimension: rank_plus_one {
-    type: number
-    sql: ${TABLE}.rank + 1 ;;
-  }
-
-  dimension: rank_plus_two {
-    type: number
-    sql: ${TABLE}.rank + 2 ;;
-  }
 
   dimension: retail_price {
     type: number
