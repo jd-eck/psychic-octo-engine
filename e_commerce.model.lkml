@@ -8,7 +8,7 @@ include: "*.dashboard"
 
 datagroup: e_commerce_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "6 hours"
+  max_cache_age: "7 hours"
 }
 
 persist_with: e_commerce_default_datagroup
