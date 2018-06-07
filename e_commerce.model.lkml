@@ -6,6 +6,7 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+#Comment about max cache age- needs to be 5+ hours for reasons
 datagroup: e_commerce_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "5 hour"
