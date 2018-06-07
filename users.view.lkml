@@ -1,5 +1,5 @@
 view: users {
-  sql_table_name: public.users ;;
+  sql_table_name: demo_db.users ;;
 
   dimension: id {
     primary_key: yes
@@ -10,13 +10,6 @@ view: users {
   dimension: age {
     type: number
     sql: ${TABLE}.age ;;
-  }
-
-  dimension: age_group {
-    type: tier
-    tiers: [18,25,35,41,50,65]
-    style: integer
-    sql: ${age} ;;
   }
 
   dimension: city {
@@ -64,30 +57,9 @@ view: users {
     sql: ${TABLE}.last_name ;;
   }
 
-  dimension: latitude {
-    type: number
-    sql: ${TABLE}.latitude ;;
-  }
-
-  dimension: longitude {
-    type: number
-    sql: ${TABLE}.longitude ;;
-  }
-
-  dimension: location {
-    type: location
-    sql_longitude: ${users.longitude} ;;
-    sql_latitude: ${users.latitude} ;;
-  }
-
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
-  }
-
-  dimension: traffic_source {
-    type: string
-    sql: ${TABLE}.traffic_source ;;
   }
 
   dimension: zip {
@@ -95,13 +67,20 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
-  dimension: West_Coast {
-    type: yesno
-    sql: ${state} IN ('California', 'Oregon', 'Washington') ;;
-  }
-
   measure: count {
     type: count
-    drill_fields: [id, last_name, first_name, events.count, order_items.count]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      id,
+      first_name,
+      last_name,
+      events.count,
+      orders.count,
+      user_data.count
+    ]
   }
 }

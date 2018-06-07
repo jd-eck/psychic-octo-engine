@@ -1,5 +1,5 @@
 view: products {
-  sql_table_name: public.products ;;
+  sql_table_name: demo_db.products ;;
 
   dimension: id {
     primary_key: yes
@@ -17,24 +17,35 @@ view: products {
     sql: ${TABLE}.category ;;
   }
 
-  dimension: cost {
-    type: number
-    sql: ${TABLE}.cost ;;
-  }
-
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;
   }
 
-  dimension: distribution_center_id {
-    type: number
-    sql: ${TABLE}.distribution_center_id ;;
+  dimension: item_name {
+    type: string
+    sql: ${TABLE}.item_name ;;
   }
 
-  dimension: name {
-    type: string
-    sql: ${TABLE}.name ;;
+  dimension: rank {
+    type: number
+    sql: ${TABLE}.rank ;;
+  }
+
+  dimension: rank_plus_ten {
+    type: number
+    sql: $(TABLE).rank + 10 ;;
+    }
+
+
+  dimension: rank_plus_one_half {
+    type: number
+    sql: ${TABLE}.rank + 0.5 ;;
+  }
+
+  dimension: rank_plus_three {
+    type: number
+    sql: ${TABLE}.rank + 3 ;;
   }
 
   dimension: retail_price {
@@ -49,6 +60,6 @@ view: products {
 
   measure: count {
     type: count
-    drill_fields: [id, name]
+    drill_fields: [id, item_name, inventory_items.count]
   }
 }

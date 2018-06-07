@@ -1,5 +1,5 @@
-view: events {
-  sql_table_name: demo_db.events ;;
+view: orders {
+  sql_table_name: demo_db.orders ;;
 
   dimension: id {
     primary_key: yes
@@ -21,9 +21,9 @@ view: events {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: type_id {
-    type: number
-    sql: ${TABLE}.type_id ;;
+  dimension: status {
+    type: string
+    sql: ${TABLE}.status ;;
   }
 
   dimension: user_id {
@@ -32,13 +32,8 @@ view: events {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: value {
-    type: string
-    sql: ${TABLE}.value ;;
-  }
-
   measure: count {
     type: count
-    drill_fields: [id, users.first_name, users.last_name, users.id]
+    drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
   }
 }
